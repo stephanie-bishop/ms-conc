@@ -1,8 +1,8 @@
 from ms_mint_conc import calibration_curves as cc
 from ms_mint_conc import ConcentrationEstimator as CE
 from ms_mint_conc import AppState as AS
-from ms_mint_conc import SessionState
-from ms_mint_conc.SessionState import get
+from ms_mint_conc import SessionState as ss
+
 import matplotlib.pyplot as plt
 import os
 import pandas as pd
@@ -105,7 +105,7 @@ std_info = st.sidebar.file_uploader("upload standard concentration file..")
 
 
 try:
-    s_st = SessionState.get(std_information=pd.read_csv(std_info))
+    s_st = ss.get(std_information=pd.read_csv(std_info))
     st.write("## your standard samples metadata file:")
     st.write(s_st.std_information)
 except:
