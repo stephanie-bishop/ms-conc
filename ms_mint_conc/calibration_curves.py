@@ -23,7 +23,7 @@ def classic_lstsqr(x_list, y_list):
 
     y_hat = y_interc + slope * x_list
 
-    residual = sum((y_list - y_hat) ** 2) / (N**2)
+    residual = sum((y_list - y_hat) ** 2) / N
     r_ini = (y_list[0] - y_hat[0]) ** 2
     r_last = (y_list[-1] - y_hat[-1]) ** 2
 
@@ -49,7 +49,7 @@ def classic_lstsqr_variable_slope(x_list, y_list):
 
     y_hat = y_interc + slope * x_list
 
-    residual = sum((y_list - y_hat) ** 2) / (N**2)
+    residual = sum((y_list - y_hat) ** 2) / N
 
     r_ini = (y_list[0] - y_hat[0]) ** 2
     r_last = (y_list[-1] - y_hat[-1]) ** 2
@@ -82,7 +82,7 @@ def classic_lstsqr_variable_slope_interval(x_list, y_list, slope_interval):
 
     y_hat = y_interc + slope * x_list
 
-    residual = sum((y_list - y_hat) ** 2) / (N**2)
+    residual = sum((y_list - y_hat) ** 2) / N
 
     r_ini = (y_list[0] - y_hat[0]) ** 2
     r_last = (y_list[-1] - y_hat[-1]) ** 2
@@ -96,7 +96,6 @@ def find_linear_range(x, y, th):
     x_c = x
     y_c = y
     y_intercept, res, r_ini, r_last = classic_lstsqr(x_c, y_c)
-
     while res > th and len(x_c) > 3:
         if r_ini > r_last:
             x_c = x_c[1:]
@@ -105,24 +104,8 @@ def find_linear_range(x, y, th):
             x_c = x_c[:-1]
             y_c = y_c[:-1]
         y_intercept, res, r_ini, r_last = classic_lstsqr(x_c, y_c)
+
     return y_intercept, x_c, y_c, res
-
-
-# def find_linear_range_variable_slope(x , y , th):
-#     """ this algorith searches the range of x values in which the data behaves linearly with variable slope"""
-#     """ suitable to work on the log-scale """
-#     x_c = x
-#     y_c = y
-#     y_intercept, slope, res, r_ini, r_last = classic_lstsqr_variable_slope(x_c, y_c)
-#     while res > th and len(x_c) > 3:
-#         if r_ini > r_last:
-#             x_c = x_c[1:]
-#             y_c = y_c[1:]
-#         else:
-#             x_c = x_c[:-1]
-#             y_c = y_c[:-1]
-#         y_intercept, slope, res, r_ini, r_last = classic_lstsqr_variable_slope(x_c, y_c)
-#     return y_intercept, slope, x_c, y_c
 
 
 def find_linear_range_variable_slope(x, y, th):
@@ -131,7 +114,6 @@ def find_linear_range_variable_slope(x, y, th):
     x_c = x
     y_c = y
     y_intercept, slope, res, r_ini, r_last = classic_lstsqr_variable_slope(x_c, y_c)
-
     while res > th and len(x_c) > 3:
         if r_ini > r_last:
             x_c = x_c[1:]
@@ -139,9 +121,7 @@ def find_linear_range_variable_slope(x, y, th):
         else:
             x_c = x_c[:-1]
             y_c = y_c[:-1]
-
         y_intercept, slope, res, r_ini, r_last = classic_lstsqr_variable_slope(x_c, y_c)
-
     return y_intercept, slope, x_c, y_c, res
 
 
@@ -153,7 +133,6 @@ def find_linear_range_variable_slope_interval(x, y, th, interval):
     y_intercept, slope, res, r_ini, r_last = classic_lstsqr_variable_slope_interval(
         x_c, y_c, interval
     )
-
     while res > th and len(x_c) > 3:
         if r_ini > r_last:
             x_c = x_c[1:]
@@ -161,29 +140,10 @@ def find_linear_range_variable_slope_interval(x, y, th, interval):
         else:
             x_c = x_c[:-1]
             y_c = y_c[:-1]
-
         y_intercept, slope, res, r_ini, r_last = classic_lstsqr_variable_slope_interval(
             x_c, y_c, interval
         )
-
     return y_intercept, slope, x_c, y_c, res
-
-
-# def find_linear_range_variable_slope_interval(x , y , th, interval):
-#     """ this algorith searches the range of x values in which the data behaves linearly with variable slope"""
-#     """ suitable to work on the log-scale """
-#     x_c = x
-#     y_c = y
-#     y_intercept, slope, res, r_ini, r_last = classic_lstsqr_variable_slope_interval(x_c, y_c, interval)
-#     while res > th and len(x_c) > 3:
-#         if r_ini > r_last:
-#             x_c = x_c[1:]
-#             y_c = y_c[1:]
-#         else:
-#             x_c = x_c[:-1]
-#             y_c = y_c[:-1]
-#         y_intercept, slope, res, r_ini, r_last = classic_lstsqr_variable_slope_interval(x_c, y_c, interval)
-#     return y_intercept, slope, x_c, y_c
 
 
 def calibration_curves(x_train, y_train):
@@ -215,16 +175,16 @@ def calibration_curves(x_train, y_train):
         y = np.array(y_train[x_train.peak_label == col])
         #         y = conc
         #         print(x)
-        y = y[x > 0.00000000001]
-        x = x[x > 0.00000000001]
+        y = y[x > 0.0000000000001]
+        x = x[x > 0.0000000000001]
 
-        x = x[y > 0.00000000001]
-        y = y[y > 0.00000000001]
+        x = x[y > 0.0000000000001]
+        y = y[y > 0.0000000000001]
         #         print(y[0])
         y = np.log(y)
         x = np.log(x)
         if len(x > 2):
-            y_inter, x_c, y_c, res = find_linear_range(x, y, 0.01)
+            y_inter, x_c, y_c, res = find_linear_range(x, y, 0.05)
         #             print(min(x_c))
         calibration_curves.lin_range_min[calibration_curves.peak_label == col] = min(
             y_c
@@ -243,6 +203,7 @@ def calibration_curves(x_train, y_train):
     calibration_curves["ULOQ"] = calibration_curves.lin_range_max.apply(
         lambda x: np.exp(x)
     )
+
     #         print(len(calibration_curves))
     return calibration_curves
 
@@ -276,16 +237,16 @@ def calibration_curves_variable_slope(x_train, y_train):
         y = np.array(y_train[x_train.peak_label == col])
         #         y = conc
         #         print(x)
-        y = y[x > 0.00000000001]
-        x = x[x > 0.00000000001]
+        y = y[x > 0.0000000000001]
+        x = x[x > 0.0000000000001]
 
-        x = x[y > 0.00000000001]
-        y = y[y > 0.00000000001]
+        x = x[y > 0.0000000000001]
+        y = y[y > 0.0000000000001]
         #         print(y[0])
         y = np.log(y)
         x = np.log(x)
         if len(x > 2):
-            y_inter, slope, x_c, y_c, res = find_linear_range_variable_slope(x, y, 0.01)
+            y_inter, slope, x_c, y_c, res = find_linear_range_variable_slope(x, y, 0.05)
         #             print(min(x_c))
         calibration_curves.lin_range_min[calibration_curves.peak_label == col] = min(
             y_c
@@ -304,7 +265,6 @@ def calibration_curves_variable_slope(x_train, y_train):
     calibration_curves["ULOQ"] = calibration_curves.lin_range_max.apply(
         lambda x: np.exp(x)
     )
-
     #         print(len(calibration_curves))
     return calibration_curves
 
@@ -338,18 +298,17 @@ def calibration_curves_variable_slope_interval(x_train, y_train, interval):
         y = np.array(y_train[x_train.peak_label == col])
         #         y = conc
         #         print(x)
-        y = y[x > 0.00000000001]
-        x = x[x > 0.00000000001]
+        y = y[x > 0.0000000000001]
+        x = x[x > 0.0000000000001]
 
-        x = x[y > 0.00000000001]
-        y = y[y > 0.00000000001]
-
+        x = x[y > 0.0000000000001]
+        y = y[y > 0.0000000000001]
         #         print(y[0])
         y = np.log(y)
         x = np.log(x)
         if len(x > 2):
             y_inter, slope, x_c, y_c, res = find_linear_range_variable_slope_interval(
-                x, y, 0.01, interval
+                x, y, 0.05, interval
             )
         #             print(min(x_c))
         calibration_curves.lin_range_min[calibration_curves.peak_label == col] = min(
@@ -402,11 +361,9 @@ def info_from_Mint(mint_, by):
 def info_from_Mint_dense(mint_):
     """this function reads mint dense shape format dataframe and transforms it to the full results format"""
 
-    out_df = mint_.melt(
-        id_vars=["peak_label"], var_name="ms_file", value_name="peak_max"
-    )
-    #     out_df.rename(columns={'peak_label':'ms_file', 'cp':'peak_label'}, inplace = True)
-    return out_df[["ms_file", "peak_label", "peak_max"]]
+    out_df = mint_.melt(id_vars=["peak_label"], var_name="cp", value_name="peak_max")
+    out_df.rename(columns={"peak_label": "ms_file", "cp": "peak_label"}, inplace=True)
+    return out_df
 
 
 def setting_from_stdinfo(std_info, results_):
@@ -545,6 +502,7 @@ def transform(X, calibration_curves):
         inrange = np.ones(len(conc))
 
         df = pd.DataFrame({"value": value, "pred_conc": conc, "in_range": inrange})
+
         df.loc[df.pred_conc < np.exp(lin_range_min), "in_range"] = 0
         df.loc[df.pred_conc > np.exp(lin_range_max), "in_range"] = 0
         df["peak_label"] = peak_label
@@ -563,10 +521,9 @@ def train_to_validation(X, Y, curves):
     X0["true_conc"] = Y
 
     curves0 = curves.copy().fillna(0.0000000000001)
-    #     curves0['Y_min'] = np.exp( curves0.intercept +  curves0.slope * curves0.lin_range_min - 0.00000001)
-    #     curves0['Y_max'] = np.exp( curves0.intercept +  curves0.slope * curves0.lin_range_max + 0.00000001)
-    curves0["Y_min"] = np.exp(curves0.lin_range_min - 0.00000001)
-    curves0["Y_max"] = np.exp(curves0.lin_range_max + 0.00000001)
+    curves0["Y_min"] = np.exp(curves0.lin_range_min)
+    curves0["Y_max"] = np.exp(curves0.lin_range_max)
+
     X0["Y_min"] = 0.0
     X0["Y_max"] = 0.0
 
