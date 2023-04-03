@@ -229,7 +229,8 @@ except:
     
 
 try:
-    s_st.cp = st.selectbox('select the compound \n' + 
+    s_st.cp = st.selectbox('Log-log plot visualization \n' +
+        'Description: This plot shows the x- and y-axes in the log scale, with the axis tick labels in the linear scale. Select the compound. \n' + 
                            s_st.x_train.peak_label.iloc[0] +
                            ' will be used by default', list(np.unique(s_st.x_train.peak_label)))
     st.write(s_st.cp)
