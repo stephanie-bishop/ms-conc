@@ -35,5 +35,5 @@ After successfuly running, the app will show a table with the parameters of the 
 
 The user may also inspect how the standard curves look like and the predicted linear ranges for each compound as well as download the log-scale standard curve graph
 
-![fig5](tutorial_images/pick_coumpound.png)
+![fig5](tutorial_images/pick_compound.png)
 ![fig6](tutorial_images/visualize.png)
