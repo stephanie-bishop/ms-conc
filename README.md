@@ -16,3 +16,4 @@ The app will display the head of the tables after successfuly providing the peak
 
 ![fig2](tutorial_images/standard_information_table.png)
 
+![fig3](tutorial_images/peak_intensities_table.png)
