@@ -7,6 +7,7 @@ This repository contains an app for standardizing metabolomics data by using sta
 
 The first step in the app is to provide data about the peaks for each metabolite and metabolites concentrations in the different standard samples. 
 
+![fig1](tutorial_images/fig_tutorial_1.png)
 
 
 
