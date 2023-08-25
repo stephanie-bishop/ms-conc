@@ -9,8 +9,10 @@ The first step in the app is to provide data about the peaks for each metabolite
 
 ![fig1](tutorial_images/fig_tutorial_1.png)
 
+The data of peak intensities can be obtained from Maven or MINT programs (this information should be especified). The data should be provided in tables (.csv or .xlsx extensions). 
+Sample tables in the proper format can also be downloaded. 
 
+The app will display the head of the tables after successfuly providing the peak intensities and standard information tables. 
 
-
-The data of peak intensities can be obtained from Maven or MINT programs (this information should be especified). The data should be provided in tables (.csv or .xlsx extensions)  
+![fig2](tutorial_images/standard_information_table.png)
 
