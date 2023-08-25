@@ -17,3 +17,7 @@ The app will display the head of the tables after successfuly providing the peak
 ![fig2](tutorial_images/standard_information_table.png)
 
 ![fig3](tutorial_images/peak_intensities_table.png)
+
+The user should indicate wich program was used to generate the peak intensities table since MAVEN and MINT export tables in different format. 
+
+![fig3](tutorial_images/pick_program.png)
