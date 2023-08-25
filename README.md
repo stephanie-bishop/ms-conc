@@ -15,9 +15,16 @@ Sample tables in the proper format can also be downloaded.
 The app will display the head of the tables after successfuly providing the peak intensities and standard information tables. 
 
 ![fig2](tutorial_images/standard_information_table.png)
-
 ![fig3](tutorial_images/peak_intensities_table.png)
 
 The user should indicate wich program was used to generate the peak intensities table since MAVEN and MINT export tables in different format. 
 
-![fig3](tutorial_images/pick_program.png)
+![fig4](tutorial_images/pick_program.png)
+
+Alfter indicating the program, Scalir will run automatically. 
+The slope of the curve in the log scale can be modified although we recommend to use the default value (1).
+Running Scalir may take few seconds.
+After successfuly running, the app will show a table with the parameters of the fitting and a table with the estimated concentrations. 
+
+![fig5](tutorial_images/download_std_parameters.png)
+![fig6](tutorial_images/download_results.png)
